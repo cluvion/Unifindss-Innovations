@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMM + Meta Ads Proposal — Unifindss Innovations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: #8a6e2f;
+      --dark: #0a0a0b;
+      --dark2: #111113;
+      --dark3: #1a1a1e;
+      --dark4: #222228;
+      --off-white: #f0ece3;
+      --muted: #7a7870;
+      --border: rgba(201,168,76,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 32px;
+      background: rgba(201,168,76,0.05);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    .company-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(13px, 2vw, 16px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dim));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 17px);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 48px;
+      font-weight: 300;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+
+    .hero-divider {
+      width: 1px; height: 64px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      margin: 0 auto;
+      animation: fadeUp 0.9s 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION ── */
+    section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+
+    .section-eyebrow {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px; display: block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 300; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-lead {
+      color: var(--muted); font-size: 15px; font-weight: 300;
+      max-width: 500px; margin-bottom: 64px;
+    }
+
+    /* ── PACKAGES GRID ── */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .package {
+      background: var(--dark2);
+      padding: 52px 44px;
+      position: relative;
+      transition: background 0.4s;
+    }
+
+    .package:hover { background: var(--dark3); }
+
+    .package.featured {
+      background: var(--dark3);
+    }
+
+    .package.featured::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top left, rgba(201,168,76,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .pkg-tag {
+      display: inline-block;
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .pkg-tag.starter {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .pkg-tag.premium {
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.25);
+    }
+
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .pkg-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 6vw, 72px);
+      font-weight: 300; line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .pkg-price span {
+      font-size: 22px;
+      vertical-align: super;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    .pkg-price .month {
+      font-size: 14px;
+      vertical-align: baseline;
+      color: var(--muted);
+    }
+
+    .featured .pkg-price {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pkg-desc {
+      font-size: 13px; color: var(--muted); font-weight: 300;
+      margin-bottom: 36px; line-height: 1.6;
+    }
+
+    .pkg-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    .deliverables-label {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-dim); margin-bottom: 20px; display: block;
+    }
+
+    .deliverable-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .del-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .del-icon.gold-bg { background: rgba(201,168,76,0.1); }
+    .del-icon.dim-bg { background: rgba(255,255,255,0.04); }
+
+    .del-text strong {
+      display: block; font-size: 14px; font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .del-text small {
+      font-size: 12px; color: var(--muted); font-weight: 300;
+    }
+
+    .pkg-cta {
+      display: block; width: 100%;
+      margin-top: 40px;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+      text-align: center; text-decoration: none;
+      cursor: pointer; border: none;
+      transition: all 0.3s ease;
+    }
+
+    .pkg-cta.outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--off-white);
+    }
+
+    .pkg-cta.outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .pkg-cta.solid {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: var(--dark);
+    }
+
+    .pkg-cta.solid:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(201,168,76,0.3);
+    }
+
+    /* ── COMPARE TABLE ── */
+    .compare-wrap {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+
+    .compare-head {
+      display: grid;
+      grid-template-columns: 1fr 140px 140px;
+      background: var(--dark3);
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-head-col {
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+
+    .compare-head-col:not(:first-child) { text-align: center; }
+    .compare-head-col.gold { color: var(--gold); }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 140px 140px;
+      padding: 16px 32px;
+      border-bottom: 1px solid rgba(201,168,76,0.06);
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row:hover { background: var(--dark3); }
+
+    .compare-row-label {
+      font-size: 13px; font-weight: 400;
+    }
+
+    .compare-row-val {
+      text-align: center; font-size: 13px;
+    }
+
+    .compare-row-val.check { color: var(--gold); font-size: 16px; }
+    .compare-row-val.cross { color: var(--muted); font-size: 18px; }
+    .compare-row-val.num { font-weight: 600; }
+
+    /* ── PROCESS ── */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .process-card {
+      background: var(--dark2);
+      padding: 36px 28px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .process-card:hover { background: var(--dark3); }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px; font-weight: 300;
+      color: rgba(201,168,76,0.1);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .process-card h4 {
+      font-size: 15px; font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .process-card p {
+      font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.6;
+    }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      background: var(--dark2);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .why-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      transform: translateY(-4px);
+    }
+
+    .why-icon {
+      font-size: 28px; margin-bottom: 20px;
+      display: block;
+    }
+
+    .why-card h4 {
+      font-size: 16px; font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .why-card p {
+      font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex; gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 12px; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-note {
+      font-size: 11px; color: var(--muted); font-weight: 300;
+    }
+
+    .gold-text { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .packages-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .compare-head, .compare-row {
+        grid-template-columns: 1fr 90px 90px;
+        padding: 14px 16px;
+      }
+      .package { padding: 36px 28px; }
+      section { padding: 64px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .compare-row-label { font-size: 12px; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-glow"></div>
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Proposal · 2025
+  </div>
+
+  <div class="company-logo">Unifindss Innovations Pvt Ltd</div>
+
+  <h1>Social Media &amp;<br><em>Growth Strategy</em></h1>
+
+  <p class="hero-sub">
+    A curated digital growth package crafted to amplify your brand presence across Meta platforms and beyond.
+  </p>
+
+  <div class="hero-divider"></div>
+</div>
+
+
+<!-- ══ PACKAGES ══ -->
+<section>
+  <span class="section-eyebrow reveal">Our Offerings</span>
+  <h2 class="section-title reveal">Choose Your <em style="font-family:'Cormorant Garamond',serif;font-style:italic;">Growth Plan</em></h2>
+  <p class="section-lead reveal">Two meticulously designed tiers — each built to deliver measurable impact for your brand on social media.</p>
+
+  <div class="packages-grid reveal">
+
+    <!-- ── STARTER 30K ── -->
+    <div class="package">
+      <span class="pkg-tag starter">Starter</span>
+      <div class="pkg-name">Growth Essentials</div>
+      <div class="pkg-price">
+        <span>₹</span>30,000<span class="month">/mo</span>
+      </div>
+      <p class="pkg-desc">Perfect for brands ready to establish a compelling social presence with consistent, high-quality content and targeted ad campaigns.</p>
+
+      <div class="pkg-divider"></div>
+      <span class="deliverables-label">What's Included</span>
+
+      <div class="deliverable-row">
+        <div class="del-icon dim-bg">🎬</div>
+        <div class="del-text">
+          <strong>4 Videos per Month</strong>
+          <small>Faceless / AI-generated / UGC-style short videos</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon dim-bg">🖼️</div>
+        <div class="del-text">
+          <strong>8 Poster Designs</strong>
+          <small>Branded static &amp; carousel posts for feed &amp; stories</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon dim-bg">📣</div>
+        <div class="del-text">
+          <strong>Meta Ads Management</strong>
+          <small>Campaign setup, targeting &amp; optimisation</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon dim-bg">📅</div>
+        <div class="del-text">
+          <strong>Content Calendar</strong>
+          <small>Monthly planned posting schedule</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon dim-bg">📊</div>
+        <div class="del-text">
+          <strong>Monthly Report</strong>
+          <small>Performance insights &amp; analytics summary</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon dim-bg">💬</div>
+        <div class="del-text">
+          <strong>Community Management</strong>
+          <small>Comments &amp; DM response support</small>
+        </div>
+      </div>
+
+      <a href="https://www.instagram.com/unifindss.official" target="_blank" class="pkg-cta outline">Get Started →</a>
+    </div>
+
+    <!-- ── PREMIUM 60K ── -->
+    <div class="package featured">
+      <span class="pkg-tag premium">⭐ Premium</span>
+      <div class="pkg-name">Scale &amp; Dominate</div>
+      <div class="pkg-price">
+        <span>₹</span>60,000<span class="month">/mo</span>
+      </div>
+      <p class="pkg-desc">For brands serious about market leadership — double the content volume, advanced ad strategy, and a dedicated growth approach.</p>
+
+      <div class="pkg-divider"></div>
+      <span class="deliverables-label">What's Included</span>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">🎬</div>
+        <div class="del-text">
+          <strong>8 Videos per Month</strong>
+          <small>Faceless / AI-generated / UGC + Reels &amp; Story videos</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">🖼️</div>
+        <div class="del-text">
+          <strong>16 Poster Designs</strong>
+          <small>Premium branded static, carousel &amp; infographic posts</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">🚀</div>
+        <div class="del-text">
+          <strong>Advanced Meta Ads</strong>
+          <small>Multi-campaign structure, A/B testing &amp; retargeting</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">🎯</div>
+        <div class="del-text">
+          <strong>Audience Research &amp; Strategy</strong>
+          <small>Deep-dive targeting &amp; competitor analysis</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">📅</div>
+        <div class="del-text">
+          <strong>Full Content Calendar</strong>
+          <small>Platform-wise strategy for Instagram, Facebook &amp; more</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">📊</div>
+        <div class="del-text">
+          <strong>Bi-Weekly Reports</strong>
+          <small>Detailed performance tracking &amp; growth metrics</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">💬</div>
+        <div class="del-text">
+          <strong>Dedicated Account Manager</strong>
+          <small>Priority support &amp; strategic consultations</small>
+        </div>
+      </div>
+
+      <div class="deliverable-row">
+        <div class="del-icon gold-bg">🔗</div>
+        <div class="del-text">
+          <strong>LinkedIn + Instagram Coverage</strong>
+          <small>Cross-platform brand consistency</small>
+        </div>
+      </div>
+
+      <a href="https://www.instagram.com/unifindss.official" target="_blank" class="pkg-cta solid">Get Premium Plan →</a>
+    </div>
+
+  </div><!-- /packages-grid -->
+
+
+  <!-- ── COMPARISON TABLE ── -->
+  <div class="compare-wrap reveal">
+    <div class="compare-head">
+      <div class="compare-head-col">Feature</div>
+      <div class="compare-head-col">₹30K Plan</div>
+      <div class="compare-head-col gold">₹60K Plan</div>
+    </div>
+
+    <div class="compare-row">
+      <div class="compare-row-label">Videos / Month</div>
+      <div class="compare-row-val num">4</div>
+      <div class="compare-row-val num gold-text">8</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">Poster Designs / Month</div>
+      <div class="compare-row-val num">8</div>
+      <div class="compare-row-val num gold-text">16</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">Meta Ads Management</div>
+      <div class="compare-row-val check">✓</div>
+      <div class="compare-row-val check">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">A/B Ad Testing</div>
+      <div class="compare-row-val cross">—</div>
+      <div class="compare-row-val check">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">Retargeting Campaigns</div>
+      <div class="compare-row-val cross">—</div>
+      <div class="compare-row-val check">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">Audience &amp; Competitor Research</div>
+      <div class="compare-row-val cross">—</div>
+      <div class="compare-row-val check">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">Performance Reports</div>
+      <div class="compare-row-val">Monthly</div>
+      <div class="compare-row-val gold-text">Bi-Weekly</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">LinkedIn Coverage</div>
+      <div class="compare-row-val cross">—</div>
+      <div class="compare-row-val check">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-label">Dedicated Account Manager</div>
+      <div class="compare-row-val cross">—</div>
+      <div class="compare-row-val check">✓</div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══ PROCESS ══ -->
+<section>
+  <span class="section-eyebrow reveal">How It Works</span>
+  <h2 class="section-title reveal">Our <em style="font-family:'Cormorant Garamond',serif;font-style:italic;">4-Step Process</em></h2>
+  <p class="section-lead reveal">From onboarding to execution — a seamless, structured approach to growing your brand.</p>
+
+  <div class="process-grid reveal">
+    <div class="process-card">
+      <div class="step-num">01</div>
+      <h4>Brand Discovery</h4>
+      <p>We deep-dive into your brand identity, target audience, business goals, and competitors to craft the right strategy.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">02</div>
+      <h4>Strategy &amp; Calendar</h4>
+      <p>A monthly content calendar is prepared with platform-specific post types, themes, and Meta Ads campaign structure.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">03</div>
+      <h4>Creation &amp; Execution</h4>
+      <p>Our team creates all videos, posters, and ad creatives. Content is published on schedule with precision targeting.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">04</div>
+      <h4>Optimise &amp; Report</h4>
+      <p>We track every metric, run optimisations mid-cycle, and deliver clear performance reports with actionable insights.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ WHY US ══ -->
+<section>
+  <span class="section-eyebrow reveal">Why Unifindss</span>
+  <h2 class="section-title reveal">Built for <em style="font-family:'Cormorant Garamond',serif;font-style:italic;">Real Results</em></h2>
+  <p class="section-lead reveal">We're not just a vendor — we're a growth partner invested in your brand's success.</p>
+
+  <div class="why-grid reveal">
+    <div class="why-card">
+      <span class="why-icon">🎨</span>
+      <h4>Scroll-Stopping Creatives</h4>
+      <p>Every video and poster is designed with intent — to stop the scroll, communicate your brand story, and drive action.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🎯</span>
+      <h4>Data-Driven Targeting</h4>
+      <p>We use Meta's advanced audience tools to ensure your ads reach the right people at the right time with the right message.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">📈</span>
+      <h4>Consistent Growth</h4>
+      <p>Our structured approach to content and ads builds compounding brand equity month after month.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🤝</span>
+      <h4>Transparent Communication</h4>
+      <p>No jargon, no guessing. You receive clear reports and direct access to our team at every stage.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">⚡</span>
+      <h4>Fast Turnaround</h4>
+      <p>Creatives delivered on schedule. Ad campaigns launched without delays. We respect your timelines.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🔒</span>
+      <h4>Brand-First Approach</h4>
+      <p>Every piece of content is tailored to your brand voice, colours, and positioning — never generic, always yours.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">Unifindss Innovations Pvt Ltd</div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/unifindss.official" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/company/unifindss/" target="_blank">LinkedIn</a>
+  </div>
+  <p class="footer-note">This proposal is valid for 30 days from the date of issue. Prices are exclusive of applicable taxes.<br>Ad spend budget is separate and managed directly by the client.</p>
+  <p class="footer-note" style="margin-top:4px;">© 2025 Unifindss Innovations Pvt Ltd · All rights reserved</p>
+</footer>
+
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
